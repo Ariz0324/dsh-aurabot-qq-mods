@@ -53,6 +53,9 @@ DSH 面板那个端口要登录态，手机拿不到。所以模组自带一个�
    - 手机填：`[240e:xxxx:xxxx::xxxx]:7788`（方括号不能少，这是 IPv6 的写法，不是可选装饰）
    - 建议把 IPv6 地址配成固定的（路由器里做 DHCPv6 静态分配），否则重启光猫可能会变
    - Windows 放行（管理员 PowerShell）：`New-NetFirewallRule -DisplayName "Pocket 7788" -Direction Inbound -Action Allow -Protocol TCP -LocalPort 7788 -Profile Any`
+     - 这一步模组替你做不了：改防火墙需要管理员权限，模组只是普通进程。跑一次就行，规则会一直留着
+     - 不想敲命令：用群里的 `pocket-allow-7788.cmd`（双击自动提权，加完会顺便列出本机地址）
+     - 360 / 火绒这类安全软件的「网络防护」也会拦入站，需要在它里面单独放行一次
 2. **隧道（面板一键启动，任何网络都能连）**
    - 电脑装 [cloudflared](https://github.com/cloudflare/cloudflared/releases/latest)（下载 `cloudflared-windows-amd64.exe` 放到任意位置，如 `C:\Users\你\auratools\bin\`；面板会自动找到，找不到就在模块设置里把完整路径填进「cloudflaredPath」）
    - 面板「口袋aurabot」页点「启动隧道」，几秒后得到一个 `https://xxx.trycloudflare.com`，点「复制隧道地址」填进 app

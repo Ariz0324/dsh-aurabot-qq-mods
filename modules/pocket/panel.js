@@ -113,6 +113,8 @@ return function Panel({ settings, save, toast }) {
         h('li', null, h('b', null, '公网 IPv6（上面带「公网 IPv6」标注的地址）'), '：地址固定、不用额外软件；但要求手机的流量有 IPv6（很多手机套餐没有），还要在光猫/路由器里放行 ' + port + ' 端口'),
         h('li', null, h('b', null, '隧道（下面按钮）'), '：手机任何网络都能连，不用公网 IP、不碰光猫；https 地址，手机浏览器打开网页也能直接录语音。代价：免费临时域名，电脑重启后要重新点一次「启动隧道」，把新地址填回 app'),
       ),
+      h('p', { className: 'ab-small ab-muted', style: { marginTop: 6 } },
+        '走 IPv6 还有个前置条件：Windows 防火墙也要放行 ' + port + ' 入站。这步要管理员权限，模组没权限替你做——用管理员 PowerShell 跑一条 netsh 命令就行（群里有一键脚本，或看 README「在外面用」一节）。安全软件（360/火绒）的网络防护也会拦，需要在它里面单独放行。'),
 
       h('div', { style: { display: 'flex', alignItems: 'center', gap: 8, marginTop: 8, flexWrap: 'wrap' } },
         h(ui.Btn, { onClick: toggleTunnel, disabled: tunBusy }, tunBusy ? '处理中…（首次约 10 秒）' : tun.running ? '停止隧道' : '启动隧道'),
